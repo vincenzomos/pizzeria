@@ -7,7 +7,6 @@ import java.util.Set;
  */
 public class PizzaWithBuilder {
 
-
     private Sauce sauce;
     private Set<Topping> toppings;
 

@@ -7,11 +7,15 @@ import java.util.Set;
  */
 public interface IPizzaBaker {
 
+    String getName();
+    IntermediatePizza bakePiza(IntermediatePizza intermediatePizza);
 
-    public IPizza bakePiza();
+    IntermediatePizza addToppings(IntermediatePizza intermediatePizza);
 
-    public IPizza addToppings();
+    IntermediatePizza addSauce(IRecipe recipe);
 
-    public IPizza addSauce();
+    IntermediatePizza startBakingYourPizza();
+
+    Set<IRecipe> getPizzaSkills();
 
 }

@@ -1,6 +1,7 @@
-package nl.vincenzo.pizzeria.model;
+package nl.vincenzo.pizzeria.model.deprecated;
 
 import lombok.Getter;
+import nl.vincenzo.pizzeria.model.IPizza;
 
 import java.util.Set;
 
@@ -10,13 +11,19 @@ import java.util.Set;
 @Getter
 public class Margherita implements IPizza {
 
-    private static Sauce SAUCE = Sauce.TOMATO;
-    private static Set<Topping> TOPPINGS = Set.of(Topping.MOZZA);
-
-
     @Override
     public void eat() {
         System.out.println("Eating pizza: " + this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void getToppings() {
+
+    }
+
+    @Override
+    public void getSauce() {
+
     }
 
 
