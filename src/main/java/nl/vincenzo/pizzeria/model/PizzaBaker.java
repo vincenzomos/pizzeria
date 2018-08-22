@@ -14,8 +14,9 @@ public class PizzaBaker implements IPizzaBaker {
     public IntermediatePizza bakePiza(IntermediatePizza intermediatePizzaStepTwo) {
         if (pizzaSkills.contains(intermediatePizzaStepTwo.getRecipe())) {
             System.out.println("Ok Chef I'll bake the pizza");
-            return IntermediatePizza.anIntermediatePizza().withToppings(intermediatePizzaStepTwo.getRecipe().getToppings())
-                    .buildPizzaStepOne();
+            return intermediatePizzaStepTwo;
+
+
         }
         throw new IllegalStateException(" Sorry i can not create  a : " + intermediatePizzaStepTwo.getRecipe().getClass().getSimpleName() + "  ask me to create one of " + pizzaSkills);
     }
@@ -24,22 +25,22 @@ public class PizzaBaker implements IPizzaBaker {
     public IntermediatePizza addToppings(IntermediatePizza intermediatePizzaStepOne) {
         if (pizzaSkills.contains(intermediatePizzaStepOne.getRecipe())) {
             System.out.println(name + ": Ok Chef I'll add the Toppings");
-            return IntermediatePizza.anIntermediatePizza().withToppings(intermediatePizzaStepOne.getRecipe().getToppings())
-                    .buildPizzaStepOne();
+            return IntermediatePizza.anIntermediatePizza().fromInstance(intermediatePizzaStepOne)
+                    .withToppings(intermediatePizzaStepOne.getRecipe().getToppings())
+                    .buildPizzaStepTwo();
         }
         throw new IllegalStateException(" Sorry i can not create  a : " + intermediatePizzaStepOne.getRecipe().getClass().getSimpleName() + "  ask me to create one of " + pizzaSkills);
     }
 
     @Override
-    public IntermediatePizza addSauce(IRecipe recipe) {
-        if (pizzaSkills.contains(recipe)) {
+    public IntermediatePizza addSauce(IntermediatePizza intermediatePizza) {
+        if (pizzaSkills.contains(intermediatePizza.getRecipe())) {
             System.out.println(name + ": Ok Boss I am adding the Sauce");
-            return IntermediatePizza.anIntermediatePizza()
-                    .withPizzaBaker(this)
-                    .withRecipe(recipe)
-                    .buildPizzaStepOne();
+            return IntermediatePizza.anIntermediatePizza().fromInstance(intermediatePizza)
+                    .withSauce(intermediatePizza.getRecipe().getSauce())
+                    .buildPizzaStepTwo();
         }
-        throw new IllegalStateException(" Sorry i can not create  a : " + recipe.getClass().getSimpleName() + "  ask me to create one of " + pizzaSkills);
+        throw new IllegalStateException(" Sorry i can not create  a : " + intermediatePizza.getRecipe().getClass().getSimpleName() + "  ask me to create one of " + pizzaSkills);
     }
 
     @Override

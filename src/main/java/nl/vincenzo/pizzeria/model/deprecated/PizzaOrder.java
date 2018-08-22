@@ -1,6 +1,8 @@
-package nl.vincenzo.pizzeria.model;
+package nl.vincenzo.pizzeria.model.deprecated;
 
 import lombok.Getter;
+import nl.vincenzo.pizzeria.model.Sauce;
+import nl.vincenzo.pizzeria.model.Topping;
 
 import java.util.Set;
 

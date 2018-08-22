@@ -1,4 +1,4 @@
-package nl.vincenzo.pizzeria.model;
+package nl.vincenzo.pizzeria.model.deprecated;
 
 /**
  * This class is responsible for... <undocumented-class>

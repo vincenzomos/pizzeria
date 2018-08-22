@@ -5,7 +5,6 @@ import nl.vincenzo.pizzeria.model.IPizzaBaker;
 import nl.vincenzo.pizzeria.model.MargeritaRecipe;
 import nl.vincenzo.pizzeria.model.OnionAndTunaRecipe;
 import nl.vincenzo.pizzeria.model.PizzaBaker;
-import nl.vincenzo.pizzeria.model.Sauce;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -19,7 +18,7 @@ public class PizzeriaApplication {
 		SpringApplication.run(PizzeriaApplication.class, args);
 
 		Director director = new Director(getPizzaBakers());
-		director.orderAllKindsOfPizza();
+		director.allKindsOfPizza();
 	}
 
 	public static List<IPizzaBaker> getPizzaBakers() {

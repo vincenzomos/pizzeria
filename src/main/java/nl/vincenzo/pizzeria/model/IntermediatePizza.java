@@ -1,13 +1,14 @@
 package nl.vincenzo.pizzeria.model;
 
 import java.util.Set;
+import java.util.StringJoiner;
 
 /**
  * This class is responsible for... <undocumented-class>
  */
 public class IntermediatePizza {
 
-    private IPizzaBaker baker;
+    private IPizzaBaker pizzaBaker;
     private Sauce sauce;
     private Set<Topping> toppings;
     private IRecipe recipe;
@@ -15,18 +16,6 @@ public class IntermediatePizza {
 
     public static IntermediatePizzaBuilder anIntermediatePizza() {
         return new IntermediatePizzaBuilder();
-    }
-
-
-    public static IntermediatePizza buildPizzaStepOne(IntermediatePizzaBuilder builder) {
-        IntermediatePizza intermediatePizza = new IntermediatePizza();
-        if(builder.recipe == null) {
-            throw new IllegalArgumentException("I need the recipe becasue I cant remember s#&t");
-        }
-        intermediatePizza.recipe = builder.recipe;
-        intermediatePizza.baker = builder.baker;
-        intermediatePizza.sauce = builder.recipe.getSauce();
-        return intermediatePizza;
     }
 
     public Sauce getSauce() {
@@ -41,17 +30,36 @@ public class IntermediatePizza {
         return recipe;
     }
 
-    public IPizzaBaker getBaker() {
-        return baker;
+    public IPizzaBaker getPizzaBaker() {
+        return pizzaBaker;
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", IntermediatePizza.class.getSimpleName() + "[", "]")
+                .add("pizzaBaker=" + pizzaBaker)
+                .add("sauce=" + sauce)
+                .add("toppings=" + toppings)
+                .add("recipe=" + recipe)
+                .toString();
     }
 
     public static final class IntermediatePizzaBuilder {
         private IRecipe recipe;
         private Sauce sauce;
         private Set<Topping> toppings;
-        private PizzaBaker baker;
+        private IPizzaBaker pizzaBaker;
 
         private IntermediatePizzaBuilder() {
+        }
+
+        public IntermediatePizzaBuilder fromInstance(IntermediatePizza intermediatePizza) {
+            IntermediatePizzaBuilder builder = new IntermediatePizzaBuilder();
+            builder.recipe = intermediatePizza.getRecipe();
+            builder.sauce = intermediatePizza.getRecipe().getSauce();
+            builder.toppings = intermediatePizza.getRecipe().getToppings();
+            builder.pizzaBaker = intermediatePizza.getPizzaBaker();
+            return builder;
         }
 
         public IntermediatePizzaBuilder withRecipe(IRecipe recipe) {
@@ -60,7 +68,7 @@ public class IntermediatePizza {
         }
 
         public IntermediatePizzaBuilder withPizzaBaker(PizzaBaker baker) {
-            this.baker = baker;
+            this.pizzaBaker = baker;
             return this;
         }
 
@@ -75,20 +83,25 @@ public class IntermediatePizza {
         }
 
 
-        public IntermediatePizza buildPizzaStepOne() {
-            return IntermediatePizza.buildPizzaStepOne(this);
-        }
+//        public IntermediatePizza buildPizzaStepOne() {
+//            IntermediatePizza intermediatePizza = new IntermediatePizza();
+//            intermediatePizza.recipe = this.recipe;
+//            intermediatePizza.pizzaBaker = this.pizzaBaker;
+//            intermediatePizza.sauce = this.sauce;
+//            return intermediatePizza;
+//        }
 
         public IntermediatePizza buildPizzaBase() {
             IntermediatePizza intermediatePizza = new IntermediatePizza();
             intermediatePizza.recipe = this.recipe;
-            intermediatePizza.baker = this.baker;
+            intermediatePizza.pizzaBaker = this.pizzaBaker;
             return intermediatePizza;
         }
 
-
         public IntermediatePizza buildPizzaStepTwo() {
             IntermediatePizza intermediatePizza = new IntermediatePizza();
+            intermediatePizza.recipe = this.recipe;
+            intermediatePizza.pizzaBaker = this.pizzaBaker;
             intermediatePizza.sauce = this.sauce;
             intermediatePizza.toppings = this.toppings;
             return intermediatePizza;

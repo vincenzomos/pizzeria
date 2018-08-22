@@ -1,6 +1,7 @@
 package nl.vincenzo.pizzeria;
 
 import nl.vincenzo.pizzeria.model.Director;
+import nl.vincenzo.pizzeria.model.IPizza;
 import nl.vincenzo.pizzeria.model.IPizzaBaker;
 import nl.vincenzo.pizzeria.model.MargeritaRecipe;
 import nl.vincenzo.pizzeria.model.OnionAndTunaRecipe;
@@ -17,9 +18,13 @@ public class DirectorTest {
 
     @Test
     public void testStepOne() {
-
         Director director = new Director(getPizzaBakers());
-        director.orderAllKindsOfPizza();
+        Set<IPizza> allPizzas = director.allKindsOfPizza();
+
+        //eat all
+        allPizzas.stream()
+                .forEach(pizza -> pizza.eat());
+
     }
 
     public static List<IPizzaBaker> getPizzaBakers() {

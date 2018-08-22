@@ -9,19 +9,16 @@ import java.util.Set;
  * This class is responsible for... <undocumented-class>
  */
 @Getter
-public class Margherita implements IPizza {
+public class Margherita  {
 
-    @Override
     public void eat() {
         System.out.println("Eating pizza: " + this.getClass().getSimpleName());
     }
 
-    @Override
     public void getToppings() {
 
     }
 
-    @Override
     public void getSauce() {
 
     }
