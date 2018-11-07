@@ -43,12 +43,6 @@ public class Pizza implements IPizza {
         private PizzaBuilder() {
         }
 
-//        public static PizzaBuilder fromOrder(PizzaOrder pizzaOrder) {
-//            PizzaBuilder pizzaBuilder = new PizzaBuilder();
-//            pizzaBuilder.sauce = pizzaOrder.getSauce();
-//            pizzaBuilder.toppings = pizzaOrder.getToppings();
-//            return pizzaBuilder;
-//        }
 
         public PizzaBuilder fromIntermediatePizza(IntermediatePizza pizza) {
             this.recipe = pizza.getRecipe();

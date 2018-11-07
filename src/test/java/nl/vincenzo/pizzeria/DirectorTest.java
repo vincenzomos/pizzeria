@@ -8,6 +8,8 @@ import nl.vincenzo.pizzeria.model.OnionAndTunaRecipe;
 import nl.vincenzo.pizzeria.model.PizzaBaker;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -17,7 +19,7 @@ import java.util.Set;
 public class DirectorTest {
 
     @Test
-    public void testStepOne() {
+    public void runPizzaBakingSimulation() {
         Director director = new Director(getPizzaBakers());
         Set<IPizza> allPizzas = director.allKindsOfPizza();
 
@@ -30,15 +32,15 @@ public class DirectorTest {
     public static List<IPizzaBaker> getPizzaBakers() {
 
         PizzaBaker margeritaBaker = PizzaBaker.PizzaBakerBuilder.aPizzaBaker()
-                .withPizzaSkills(Set.of(new MargeritaRecipe()))
+                .withPizzaSkills(new HashSet<>(Arrays.asList(new MargeritaRecipe())))
                 .withName("Mario")
                 .build();
 
         PizzaBaker onionTunaBaker = PizzaBaker.PizzaBakerBuilder.aPizzaBaker()
-                .withPizzaSkills(Set.of(new OnionAndTunaRecipe()))
+                .withPizzaSkills(new HashSet<>(Arrays.asList(new OnionAndTunaRecipe())))
                 .withName("Pepe")
                 .build();
 
-        return List.of(margeritaBaker, onionTunaBaker);
+        return Arrays.asList(margeritaBaker, onionTunaBaker);
     }
 }

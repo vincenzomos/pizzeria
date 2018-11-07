@@ -1,5 +1,7 @@
 package nl.vincenzo.pizzeria.model;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -7,13 +9,12 @@ import java.util.Set;
  */
 public class OnionAndTunaRecipe implements IRecipe {
 
-    @Override
     public Sauce getSauce() {
         return Sauce.TOMATO;
     }
 
-    @Override
     public Set<Topping> getToppings() {
-        return  Set.of(Topping.MOZZA, Topping.TUNA, Topping.ONION);
+        return  new HashSet<>(Arrays.asList(Topping.MOZZA, Topping.TUNA, Topping.ONION));
+
     }
 }

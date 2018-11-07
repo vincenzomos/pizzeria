@@ -12,40 +12,35 @@ import java.util.stream.Collectors;
  */
 public class Director {
 
-    List<IPizzaBaker> slaves;
+    List<IPizzaBaker> pizzaBakerSlaves;
 
     public Director(List<IPizzaBaker> slaves) {
-        this.slaves = slaves;
+        this.pizzaBakerSlaves = slaves;
     }
 
     public Set<IPizza> allKindsOfPizza() {
-        List<IntermediatePizza> startOfPizzaOrders = slaves.stream()
+        List<IntermediatePizza> startOfPizzaOrders = pizzaBakerSlaves.stream()
                 .map(s -> s.startBakingYourPizza())
                 .collect(Collectors.toCollection(ArrayList::new));
 
         PizzaPrepareStep stepOfAddingSauce = new PizzaPrepareStep(this::isFirstStepFinished, PizzaPrepareStepType.ADD_SAUCE);
 
-        List<IntermediatePizza> intermediateResults = processPizzaStep(new ArrayList<IntermediatePizza>(
+        List<IntermediatePizza> basePizzasWithSauce = processPizzaStep(new ArrayList<IntermediatePizza>(
         ), startOfPizzaOrders, stepOfAddingSauce);
         System.out.println("Boss: Allright You Fools Now its ready for step2");
 
         PizzaPrepareStep stepOfAddingToppings = new PizzaPrepareStep(this::isSecondStepFinished, PizzaPrepareStepType.ADD_TOPPING);
 
         List<IntermediatePizza> intermediateResultsAfterStep2 = processPizzaStep(new ArrayList<IntermediatePizza>(
-        ), intermediateResults, stepOfAddingToppings);
+        ), basePizzasWithSauce, stepOfAddingToppings);
 
-        System.out.println("Boss: Finally you're done , let's let the customer decide what he wants.");
+        System.out.println("Boss: Finally idiots you're done , let's let the customer decide what he wants.");
 
         return intermediateResultsAfterStep2.stream()
                 .map(pizza -> Pizza.aPizza().fromIntermediatePizza(pizza).build())
                 .collect(Collectors.toSet());
 
     }
-
-//    private IPizza constructPizzaFromIntermediatePizza(List<IntermediatePizza> intermediateResults) {
-//
-//
-//    }
 
     /**
     /**
